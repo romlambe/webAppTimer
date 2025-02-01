@@ -38,6 +38,19 @@ function startTimer(timerId){
 	}, 1000);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+	console.log("DOM chargé !");
+	const button = document.getElementById('go-to-page2');
+	if (button) {
+		button.addEventListener('click', () => {
+			console.log("Bouton cliqué !");
+			window.electron.send('navigate-to', 'page2.html');
+		});
+	} else {
+		console.log("⚠️ Bouton non trouvé !");
+	}
+});
+
 document.getElementById("timer1").addEventListener("click", () => startTimer("timer1"));
 document.getElementById("timer2").addEventListener("click", () => startTimer("timer2"));
 document.getElementById("timer3").addEventListener("click", () => startTimer("timer3"));
