@@ -1,0 +1,19 @@
+# Ignorer les dépendances installées avec npm
+node_modules/
+package-lock.json
+
+# Ignorer les fichiers de compilation
+dist/
+build/
+
+# Ignorer les fichiers système
+.DS_Store
+Thumbs.db
+
+# Ignorer les logs et fichiers temporaires
+*.log
+.npm/
+.cache/
+
+# Ignorer les fichiers Electron
+electron/dist/
