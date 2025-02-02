@@ -91,5 +91,11 @@ function resetTimer() {
 }
 
 function endTimer(){
-
+	clearInterval(timerInterval);
 }
+
+//rajouter un son lorsque le timer est terminé,
+//changer le bouton en stop pour arreter le son,
+//puis revenir dans le menu
+
+//ajouter des animations lorsque le minuteur tourne 
