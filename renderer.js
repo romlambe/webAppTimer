@@ -1,58 +1,86 @@
-const timers = {
-	timer1: 179,
-	timer2: 359,
-	timer3: 539,
-	timer4: 719
+let timerInterval;
+let timeRemaining;
+let pause = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+	console.log("✅ DOM chargé !");
+	console.log("window.electron :", window.electron);
+
+	const goToPage2Button = document.getElementById('go-to-page2');
+	if (goToPage2Button) {
+		goToPage2Button.addEventListener('click', () => {
+			console.log("📌 Bouton Start cliqué !");
+			if (window.electron) {
+				window.electron.send('navigate-to', 'page2.html');
+			} else {
+				console.error("❌ window.electron est indéfini !");
+			}
+		});
+	}
+
+	if (document.getElementById('timer-selection')) {
+		initTimerEvents();
+	}
+});
+
+function initTimerEvents() {
+	console.log("🔄 Initialisation des événements du timer");
+
+	document.querySelectorAll('#timer-selection button').forEach(button => {
+		button.addEventListener('click', () => {
+			const time = parseInt(button.getAttribute("data-time"), 10);
+			startTimer(time);
+		});
+	});
+
+	const stopButton = document.getElementById('stop-timer');
+	if (stopButton) {
+		stopButton.addEventListener('click', stopTimer);
+	}
+
+	const backButton = document.getElementById('back-to-selection');
+	if (backButton) {
+		backButton.addEventListener('click', resetTimer);
+	}
 }
 
-let intervals = {};
+function startTimer(time) {
+	timeRemaining = time;
+	updateTimerDisplay();
 
+	document.getElementById('timer-selection').style.display = 'none';
+	document.getElementById('timer-display').style.display = 'block';
 
-function formatTimer(seconds){
-	const minutes = Math.floor(seconds / 60);
-	const sec = seconds % 60;
-	return `${String(minutes).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-}
-
-
-function updateTimer(timerId, value){
-	document.getElementById(timerId).textContent = formatTimer(value);
-}
-
-function startTimer(timerId){
-	if(intervals[timerId]) return;
-
-	let timeLeft = timers[timerId];
-	updateTimer(timerId, timeLeft);
-
-	intervals[timerId] = setInterval(() =>{
-		if (timeLeft > 0){
-			timeLeft--;
-			updateTimer(timerId, timeLeft);
-			console.log("Timer is starting");
-		}else{
-			clearInterval(intervals[timerId]);
-			delete intervals[timerId];
-			console.log(`Timer ${timerId} is done`);
+	timerInterval = setInterval(() => {
+		if (timeRemaining <= 0) {
+			clearInterval(timerInterval);
+			console.log("⏳ Timer terminé !");
+			resetTimer();
+		} else {
+			timeRemaining--;
+			updateTimerDisplay();
 		}
 	}, 1000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-	console.log("DOM chargé !");
-	const button = document.getElementById('go-to-page2');
-	if (button) {
-		button.addEventListener('click', () => {
-			console.log("Bouton cliqué !");
-			window.electron.send('navigate-to', 'page2.html');
-		});
-	} else {
-		console.log("⚠️ Bouton non trouvé !");
+function updateTimerDisplay() {
+	const min = Math.floor(timeRemaining / 60);
+	const sec = timeRemaining % 60;
+	document.getElementById('current-timer').textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+}
+
+function stopTimer() {
+	if (pause === false){
+		clearInterval(timerInterval);
+		pause = true;
+	}else{
+		startTimer(timeRemaining);
+		pause = false;
 	}
-});
+}
 
-document.getElementById("timer1").addEventListener("click", () => startTimer("timer1"));
-document.getElementById("timer2").addEventListener("click", () => startTimer("timer2"));
-document.getElementById("timer3").addEventListener("click", () => startTimer("timer3"));
-document.getElementById("timer4").addEventListener("click", () => startTimer("timer4"));
-
+function resetTimer() {
+	clearInterval(timerInterval);
+	document.getElementById('timer-selection').style.display = 'block';
+	document.getElementById('timer-display').style.display = 'none';
+}

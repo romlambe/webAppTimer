@@ -33,3 +33,4 @@ ipcMain.on('navigate-to', (event, page) =>{
 		mainWindow.loadFile(page);
 	}
 });
+
