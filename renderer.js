@@ -3,29 +3,29 @@ let timeRemaining;
 let pause = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("✅ DOM chargé !");
-	console.log("window.electron :", window.electron);
 
 	const goToPage2Button = document.getElementById('go-to-page2');
 	if (goToPage2Button) {
 		goToPage2Button.addEventListener('click', () => {
-			console.log("📌 Bouton Start cliqué !");
 			if (window.electron) {
 				window.electron.send('navigate-to', 'page2.html');
-			} else {
-				console.error("❌ window.electron est indéfini !");
 			}
 		});
 	}
-
+	const goToHomePage = document.getElementById('go-to-home');
+	if (goToHomePage) {
+		goToHomePage.addEventListener('click', () => {
+			if (window.electron){
+				window.electron.send('navigate-to', 'index.html');
+			}
+		})
+	}
 	if (document.getElementById('timer-selection')) {
 		initTimerEvents();
 	}
 });
 
 function initTimerEvents() {
-	console.log("🔄 Initialisation des événements du timer");
-
 	document.querySelectorAll('#timer-selection button').forEach(button => {
 		button.addEventListener('click', () => {
 			const time = parseInt(button.getAttribute("data-time"), 10);
@@ -48,13 +48,13 @@ function startTimer(time) {
 	timeRemaining = time;
 	updateTimerDisplay();
 
+	document.getElementById('go-to-home').style.display = 'none';
 	document.getElementById('timer-selection').style.display = 'none';
 	document.getElementById('timer-display').style.display = 'block';
 
 	timerInterval = setInterval(() => {
 		if (timeRemaining <= 0) {
 			clearInterval(timerInterval);
-			console.log("⏳ Timer terminé !");
 			resetTimer();
 		} else {
 			timeRemaining--;
@@ -81,6 +81,12 @@ function stopTimer() {
 
 function resetTimer() {
 	clearInterval(timerInterval);
+	document.getElementById('go-to-home').style.display = 'block';
 	document.getElementById('timer-selection').style.display = 'block';
 	document.getElementById('timer-display').style.display = 'none';
+
+	// Pour réappliquer le CSS
+	document.getElementById('timer-selection').style.display = 'flex';
+	document.getElementById('go-to-home').style.display = 'flex';
+
 }

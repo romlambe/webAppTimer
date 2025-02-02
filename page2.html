@@ -3,21 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<title>Timer</title>
 </head>
 <body>
-		<div id="timer-selection">
-			<button id="timer1" data-time="180">03:00</button>
-			<button id="timer2" data-time="360">06:00</button>
-			<button id="timer3" data-time="540">09:00</button>
-			<button id="timer4" data-time="720">12:00</button>
-		</div>
-		<div id="timer-display" style="display: none;">
-			<h1 id="current-timer">00:00</h1>
-			<button id="stop-timer">Pause</button>
-			<button id="back-to-selection">Retour</button>
-		</div>
-		<script src="renderer.js"></script>
+	<div>
+		<button id="go-to-home" class="back"><</button>
+	</div>
+	<div id="timer-selection" class="selection">
+		<button id="timer1" data-time="180" class="timer">03:00</button>
+		<button id="timer2" data-time="360" class="timer">06:00</button>
+		<button id="timer3" data-time="540" class="timer">09:00</button>
+		<button id="timer4" data-time="720" class="timer">12:00</button>
+	</div>
+	<div id="timer-display" style="display: none;">
+		<button id="back-to-selection" class="back"><</button>
+		<h1 id="current-timer" >00:00</h1>
+		<button id="stop-timer" class="pause">Pause</button>
+	</div>
+	<script src="renderer.js"></script>
 </body>
 </html>

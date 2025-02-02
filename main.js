@@ -9,10 +9,10 @@ const createWindow = () => {
 		width: 400,
 		height: 600,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'), // Optionnel, pour la sécurité
-			contextIsolation: true, // Activez pour la sécurité
-			enableRemoteModule: false, // Désactivez pour la sécurité
-			nodeIntegration: false, // Désactivez pour la sécurité
+			preload: path.join(__dirname, 'preload.js'),
+			contextIsolation: true,
+			enableRemoteModule: false,
+			nodeIntegration: false,
 		}
 	})
 
