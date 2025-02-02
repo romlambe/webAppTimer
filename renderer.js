@@ -54,8 +54,7 @@ function startTimer(time) {
 
 	timerInterval = setInterval(() => {
 		if (timeRemaining <= 0) {
-			clearInterval(timerInterval);
-			resetTimer();
+			endTimer()
 		} else {
 			timeRemaining--;
 			updateTimerDisplay();
@@ -88,5 +87,9 @@ function resetTimer() {
 	// Pour réappliquer le CSS
 	document.getElementById('timer-selection').style.display = 'flex';
 	document.getElementById('go-to-home').style.display = 'flex';
+
+}
+
+function endTimer(){
 
 }

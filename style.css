@@ -74,6 +74,28 @@ body{
 
 	background-color: #FE5E8F;
 	color: #FFCF5E;
+	box-shadow:
+		inset 0 1px 0 0 rgba(255,255,255,0.4),
+		0 2px 0 0 #ff5286,
+		0 4px 0 0 #f43f5e,
+		0 6px 0 0 #e11d48,
+		0 8px 0 0 #be123c,
+		0 8px 16px 0 rgba(244,114,182,0.5);
+}
+
+.back:hover{
+	transform: translateY(4px);
+	box-shadow:
+	inset 0 1px 0 0 rgba(255,255,255,0.4),
+	0 1px 0 0 #ff5286,
+	0 2px 0 0 #f43f5e,
+	0 3px 0 0 #e11d48,
+	0 4px 0 0 #be123c,
+	0 4px 8px 0 rgba(244,114,182,0.5);
+}
+
+.back:hover i {
+	animation: pulse 4s infinite;
 }
 
 .selection{
@@ -100,6 +122,21 @@ body{
 		0 6px 0 0 #e11d48,
 		0 8px 0 0 #be123c,
 		0 8px 16px 0 rgba(244,114,182,0.5);
+}
+
+.timer:hover{
+	transform: translateY(4px);
+	box-shadow:
+	inset 0 1px 0 0 rgba(255,255,255,0.4),
+	0 1px 0 0 #ff5286,
+	0 2px 0 0 #f43f5e,
+	0 3px 0 0 #e11d48,
+	0 4px 0 0 #be123c,
+	0 4px 8px 0 rgba(244,114,182,0.5);
+}
+
+.timer:hover i {
+	animation: pulse 4s infinite;
 }
 
 .pause{
@@ -135,6 +172,10 @@ body{
 	animation: pulse 4s infinite;
 }
 
+.current-timer{
+	color: #FE5E8F;
+	text-align: center;
+}
 
 @keyframes pulse{
 	0% {
